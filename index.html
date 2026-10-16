@@ -1,41 +1,132 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Project</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #101014;
-      color: white;
-      font-family: sans-serif;
-    }
-
-    .card {
-      text-align: center;
-      padding: 40px;
-    }
-
-    button {
-      padding: 12px 24px;
-      border: 0;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0a12">
+  <title>SETARA — بازی معمای مجموعه‌ها</title>
+  <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
-  <div class="card">
-    <h1>سلام داداش! 🚀</h1>
-    <p>سایت من با موفقیت اجرا شد.</p>
-    <button onclick="alert('همه‌چی درسته!')">
-      تست کن
-    </button>
+<div class="splash" id="splash">
+  <div class="logo">
+    <div class="logo-icon">
+      <div class="circle left"></div>
+      <div class="circle right"></div>
+    </div>
+    <div class="logo-text">SETPLAY</div>
   </div>
+
+  <div class="loading-bar"></div>
+
+  <div class="loading-text">Loading...</div>
+</div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="SETARA صفحه اصلی">
+        <img src="./img/Untitled-1.png" class="brand-mark" alt="">
+        <span>SETARA<span class="brand-dot">.</span></span>
+      </a>
+      <div class="top-meta">
+        <span class="level-pill"><span class="status-dot"></span> نسخه آزمایشی</span>
+        <div class="score-chip"><span aria-hidden="true">✦</span> <span id="total-score">۰</span></div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home-screen" class="screen home-screen">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> منطق را بازی کن</div>
+          <h1>به دنیای<br><span class="gradient-text">مجموعه‌ها</span> خوش آمدی.</h1>
+          <p class="hero-description">با حل معماهای کوتاه، منطق مجموعه‌ها را کشف کن. هر مرحله یک قدم به تسلط نزدیک‌ترت می‌کند.</p>
+          <div class="hero-actions">
+            <button id="start-button" class="button button-primary">شروع مأموریت <span aria-hidden="true">←</span></button>
+            <button id="how-button" class="button button-quiet">چطور بازی کنم؟</button>
+          </div>
+          <div class="mini-stats">
+            <div><strong>۰۱</strong><span>مرحله‌ی آماده</span></div>
+            <div><strong>۵</strong><span>مفهوم اصلی</span></div>
+            <div><strong>∞</strong><span>فرصت یادگیری</span></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="floating-label label-a">A = {1, 2, 3}</div>
+          <div class="floating-label label-b">B ⊂ A</div>
+          <div class="venn-visual">
+            <div class="venn-circle circle-a"><span>A</span><i>۱</i><i>۲</i><i>۳</i></div>
+            <div class="venn-circle circle-b"><span>B</span><i>۲</i><i>۳</i></div>
+            <div class="venn-spark spark-one">✦</div>
+            <div class="venn-spark spark-two">✧</div>
+          </div>
+          <div class="art-caption"><span class="caption-dot"></span> تمرین کن. کشف کن. پیشرفت کن.</div>
+        </div>
+      </section>
+
+      <section id="mission-screen" class="screen mission-screen hidden">
+        <div class="mission-heading">
+          <button id="back-button" class="icon-button" aria-label="بازگشت">→</button>
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> مأموریت ۰۱</div>
+            <h2>شکارچی مجموعه‌ها</h2>
+          </div>
+          <div class="mission-progress"><span id="progress-label">۱ از ۳</span><div class="progress-track"><span id="progress-fill"></span></div></div>
+        </div>
+
+        <div class="game-layout">
+          <section class="puzzle-card">
+            <div class="card-topline"><span class="concept-tag">مفهوم: عضو مجموعه</span><span class="question-number" id="question-number">پرسش ۰۱</span></div>
+            <h3 id="question-title">کدام اعداد عضو مجموعه‌ی A هستند؟</h3>
+            <p id="question-description" class="question-description">همه‌ی اعضای مجموعه را انتخاب کن، سپس پاسخ را بررسی کن.</p>
+            <div class="set-definition"><span class="set-symbol">A</span><div><small>مجموعه‌ی هدف</small><strong id="set-definition">A = {۱، ۳، ۵}</strong></div></div>
+            <div id="answer-options" class="answer-options" aria-label="گزینه‌های پاسخ"></div>
+            <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
+            <div class="puzzle-actions">
+              <button id="hint-button" class="button button-quiet">✦ راهنمایی</button>
+              <button id="check-button" class="button button-primary">بررسی پاسخ <span aria-hidden="true">←</span></button>
+              <button id="next-button" class="button button-primary hidden">مرحله‌ی بعد <span aria-hidden="true">←</span></button>
+            </div>
+          </section>
+
+          <aside class="side-panel">
+            <div class="side-card">
+              <div class="side-card-heading"><span class="side-icon">✦</span><h4>دفترچه‌ی یادگیری</h4></div>
+              <p id="lesson-text">مجموعه، گروهی از اعضای مشخص است. اگر عددی در مجموعه قرار داشته باشد، می‌گوییم عضو آن مجموعه است.</p>
+              <div class="example-line"><span>نماد عضویت</span><code>3 ∈ A</code></div>
+              <div class="example-line"><span>نماد عدم عضویت</span><code>4 ∉ A</code></div>
+            </div>
+            <div class="side-card score-card">
+              <div class="side-card-heading"><span class="side-icon">↗</span><h4>پیشرفت تو</h4></div>
+              <div class="score-number"><strong id="session-score">۰</strong><span>امتیاز این مأموریت</span></div>
+              <div class="progress-track score-track"><span id="score-fill"></span></div>
+              <p class="muted-note">با پاسخ درست امتیاز بگیر و مفاهیم را یاد بگیر.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="result-screen" class="screen result-screen hidden">
+        
+        <div class="result-symbol">✦</div>
+        <div class="eyebrow"><span class="eyebrow-line"></span> مأموریت به پایان رسید</div>
+        <h2>شروع خوبی بود.</h2>
+        <p>اولین قدم را در دنیای مجموعه‌ها برداشتی. آماده‌ای برای مرحله‌های بعدی؟</p>
+        <div class="result-score"><strong id="final-score">۰</strong><span>امتیاز کسب‌شده</span></div>
+        <button id="restart-button" class="button button-primary">دوباره بازی کن <span aria-hidden="true">←</span></button>
+      </section>
+    </main>
+    <footer class="footer"><span>SETARA<span class="brand-dot">.</span></span><span></span>© 2026 Soroush Karamian. All rights reserved.<span>نسخه‌ی ۰.۱</span></footer>
+  </div>
+
+  <dialog id="how-dialog" class="help-dialog">
+    <button id="close-help" class="dialog-close" aria-label="بستن">×</button>
+    <span class="side-icon">✦</span>
+    <h3>چطور بازی کنی؟</h3>
+    <p>گزینه‌هایی را انتخاب کن که عضو مجموعه‌ی مشخص‌شده هستند. بعد روی «بررسی پاسخ» بزن. اگر اشتباه کنی، می‌توانی دوباره تلاش کنی یا راهنمایی بگیری.</p>
+    <button id="got-it-button" class="button button-primary">متوجه شدم</button>
+  </dialog>
+  <script src="./script/script.js"></script>
+  
 </body>
 </html>
